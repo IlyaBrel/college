@@ -13,10 +13,6 @@ public class SubjectService {
     private List<Subject> subjects = new ArrayList<>();
     private long ID = 0;
 
-    {
-        subjects.add(new Subject(++ID, "mat", "toda", "me"));
-        subjects.add(new Subject(++ID, "fiz", "toda", "we"));
-    }
 
     public List<Subject> listSubjects() {
         return subjects;
