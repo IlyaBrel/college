@@ -7,6 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class SubjectController {
@@ -18,20 +22,23 @@ public class SubjectController {
     }
 
     @GetMapping("/")
-    public String subjects(Model model) {
-        model.addAttribute("subjects", subjectService.listSubjects());
+    public String subjects(@RequestParam(name = "title",required = false) String title, Model model) {
+        model.addAttribute("subjects", subjectService.listSubjects(title));
         return "subjects";
     }
     @GetMapping("/subject/{id}")
     public String subjectInfo(@PathVariable Long id, Model model){
-        model.addAttribute("subject",subjectService.getSubjectById(id));
+        Subject subject = subjectService.getSubjectById(id);
+        model.addAttribute("subject",subject);
+        model.addAttribute("image",subject.getImages());
         return "subjects-info";
     }
 
     @PostMapping("/subject/create")
-    public String createSubject(Subject subject){
-            subjectService.saveSubject(subject);
-            return "redirect:/";
+    public String createSubject(@RequestParam("file1") MultipartFile file1, @RequestParam("file2") MultipartFile file2,
+                                 @RequestParam("file3") MultipartFile file3, Subject subject) throws IOException {
+        subjectService.saveSubject(subject, file1, file2, file3);
+        return "redirect:/";
     }
 
     @PostMapping("/subject/delete/{id}")

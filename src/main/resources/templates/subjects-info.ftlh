@@ -7,6 +7,11 @@
 <h1>COLLEGE</h1>
 <hr>
 <h4>Подробная информация о предмете </h4>
+
+<#list image as img>
+    <img src="/images/${img.id}" height="60px"/><br><br>
+</#list>
+
 <b>Название предмета </b>${subject.title}<br>
 <b>Описание </b>${subject.description}<br>
 <b>Автор </b>${subject.author}<br>

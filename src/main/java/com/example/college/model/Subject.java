@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -15,7 +18,7 @@ import javax.persistence.*;
 public class Subject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "title")
@@ -24,5 +27,22 @@ public class Subject {
     private String description;
     @Column(name = "author")
     private String author;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+           mappedBy = "subject")
+    private List<Image> images = new ArrayList<>();
+    private Long previewImageId;
+    private LocalDateTime dateOfCreated;
+
+    @PrePersist
+    private void init() {
+        dateOfCreated = LocalDateTime.now();
+    }
+
+
+    public void addImageToSubject(Image image) {
+        image.setSubject(this);
+        images.add(image);
+    }
 
 }
