@@ -4,8 +4,12 @@
     <title>COLLEGE</title>
 </head>
 <body>
-<h1>COLLEGE</h1>
+<h1>COLLEGE | <a href="/login">Войти</a> </h1>
 <hr>
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <input type="submit" value="Выйти">
+</form>
 <h4>Предметы в колледже</h4>
 
 <form action="/" method="get">
