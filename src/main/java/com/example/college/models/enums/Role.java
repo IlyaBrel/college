@@ -1,9 +1,8 @@
-package com.example.college.model.enums;
+package com.example.college.models.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 
 public enum Role implements GrantedAuthority {
-
     ROLE_USER, ROLE_ADMIN;
 
     @Override

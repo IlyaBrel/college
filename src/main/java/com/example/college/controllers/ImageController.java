@@ -1,7 +1,8 @@
 package com.example.college.controllers;
 
-import com.example.college.model.Image;
-import com.example.college.repository.ImageRepository;
+
+import com.example.college.models.Image;
+import com.example.college.repositories.ImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
